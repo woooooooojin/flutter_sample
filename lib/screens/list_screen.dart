@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/models/cat.dart';
 import 'package:flutter_sample/screens/detail_screen.dart';
+import 'package:flutter_sample/screens/upload_screen.dart';
 
 final List<Cat> cats = [
   Cat(
@@ -67,7 +68,12 @@ class _ListScreenState extends State<ListScreen> {
           //업로드화면으로 이동
           IconButton(
             icon: const Icon(Icons.camera_alt),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => const UploadScreen(),
+              );
+            },
           ),
         ],
       ),

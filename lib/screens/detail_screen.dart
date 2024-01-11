@@ -19,6 +19,8 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  bool isLiked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,80 +28,118 @@ class _DetailScreenState extends State<DetailScreen> {
         title: Text(widget.cat.title),
       ),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.only(
-            top: 10.0,
-            left: 10.0,
-            right: 10.0,
-          ),
-          physics: const ClampingScrollPhysics(),
+        child: Stack(
           children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: Image.asset(
-                widget.cat.link,
-                fit: BoxFit.cover,
+            ListView(
+              padding: const EdgeInsets.only(
+                top: 10.0,
+                left: 10.0,
+                right: 10.0,
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              physics: const ClampingScrollPhysics(),
               children: [
-                Text(
-                  widget.cat.name,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    color: Color(0xFF777777),
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Image.asset(
+                    widget.cat.link,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: Icon(
-                    Icons.thumb_up_outlined,
-                  ),
-                  onPressed: () {},
-                ),
-                Text(
-                  widget.cat.likeCount.toString(),
-                ),
-              ],
-            ),
-            Text("댓글 ${widget.cat.replyCount}개"),
-            ...List.generate(
-              replies.length,
-              (int index) => Padding(
-                padding: const EdgeInsets.only(
-                  top: 10.0,
-                ),
-                child: Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      '익명',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0),
-                    ),
                     Text(
-                      replies[index],
+                      widget.cat.name,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        color: Color(0xFF777777),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          icon: Icon(isLiked
+                              ? Icons.thumb_up
+                              : Icons.thumb_up_outlined),
+                          onPressed: () {
+                            setState(() {
+                              isLiked = !isLiked;
+                            });
+                          },
+                        ),
+                        Text(
+                          widget.cat.likeCount.toString(),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ),
+                Text("댓글 ${widget.cat.replyCount}개"),
+                ...List.generate(
+                  replies.length,
+                  (int index) => Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10.0,
+                    ),
+                    child: Row(
+                      children: [
+                        const Text(
+                          '익명',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 3.0),
+                        ),
+                        Text(
+                          replies[index],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 5.0,
+                  ),
+                  child: Text(
+                    '${widget.cat.created.year}년 ${widget.cat.created.month}월 ${widget.cat.created.day}일',
+                    style: const TextStyle(
+                        color: Color(
+                      0xFFAAAAAA,
+                    )),
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 10.0,
-              ),
-              child: Text(
-                '${widget.cat.created.year}년 ${widget.cat.created.month}월 ${widget.cat.created.day}일',
-                style: const TextStyle(
-                    color: Color(
-                  0xFFAAAAAA,
-                )),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.only(
+                    top: 10.0,
+                  ),
+                  color: Theme.of(context).canvasColor,
+                  child: const TextField(
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                        top: 5.0,
+                        bottom: 5.0,
+                        left: 10.0,
+                      ),
+                      border: OutlineInputBorder(),
+                      hintText: '댓글작성',
+                      suffixIcon: Icon(
+                        Icons.send,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
