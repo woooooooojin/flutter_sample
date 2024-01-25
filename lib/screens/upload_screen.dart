@@ -27,7 +27,7 @@ class _UploadScreenState extends State<UploadScreen> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       padding: const EdgeInsets.only(
-        top: 100.0,
+        top: 10.0,
       ),
       child: SafeArea(
         bottom: false,
