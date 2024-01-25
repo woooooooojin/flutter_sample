@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/models/cat.dart';
+import 'package:flutter_sample/screens/catinfo_screen.dart';
 import 'package:flutter_sample/screens/detail_screen.dart';
 import 'package:flutter_sample/screens/join_screen.dart';
 import 'package:flutter_sample/screens/upload_screen.dart';
@@ -81,6 +82,34 @@ class _ListScreenState extends State<ListScreen> {
               showDialog(context: context, builder: (_) => const JoinScreen());
             },
             icon: const Icon(Icons.person),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => const CatInfoScreen(),
+                );
+              },
+            ),
+            label: 'info',
+          ),
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => const CatInfoScreen(),
+                );
+              },
+            ),
+            label: 'info',
           ),
         ],
       ),

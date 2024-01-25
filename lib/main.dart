@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/screens/catinfo_screen.dart';
 import 'package:flutter_sample/screens/list_screen.dart';
-import 'package:flutter_sample/screens/sample_screen.dart';
+import 'package:flutter_sample/screens/provider_smaple.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
-}
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => MainProvider(),
+      child: const MyApp(),
+    ),
+  );
+} //runapp의 인자로 ChangeNotifierProvider를 직접 전달해주어 하위 myapp 어디서든 MainProvider를 사용 할 수 있다.
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
