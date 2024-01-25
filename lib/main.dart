@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/screens/join_screen.dart';
 import 'package:flutter_sample/screens/list_screen.dart';
 
 void main() {
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const JoinScreen(),
+      home: const ListScreen(),
     );
   }
 }

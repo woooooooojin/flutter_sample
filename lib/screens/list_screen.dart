@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/models/cat.dart';
 import 'package:flutter_sample/screens/detail_screen.dart';
+import 'package:flutter_sample/screens/join_screen.dart';
 import 'package:flutter_sample/screens/upload_screen.dart';
 
 final List<Cat> cats = [
@@ -74,6 +75,12 @@ class _ListScreenState extends State<ListScreen> {
                 builder: (_) => const UploadScreen(),
               );
             },
+          ),
+          IconButton(
+            onPressed: () {
+              showDialog(context: context, builder: (_) => const JoinScreen());
+            },
+            icon: const Icon(Icons.person),
           ),
         ],
       ),
