@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/screens/catinfo_screen.dart';
 import 'package:flutter_sample/screens/list_screen.dart';
 import 'package:flutter_sample/screens/provider_smaple.dart';
 import 'package:provider/provider.dart';

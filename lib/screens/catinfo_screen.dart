@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/screens/provider_smaple.dart';
 import 'package:provider/provider.dart';
 
-class CatInfoScreen extends StatelessWidget {
+class CatInfoScreen extends StatefulWidget {
   const CatInfoScreen({super.key});
+
+  @override
+  State<CatInfoScreen> createState() => _CatInfoScreenState();
+}
+
+class _CatInfoScreenState extends State<CatInfoScreen> {
+  TextEditingController nameController = TextEditingController();
+  void setName(String newName) {
+    nameController.text = newName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,33 +22,57 @@ class CatInfoScreen extends StatelessWidget {
         title: const Text('cat info'),
         backgroundColor: Colors.lightBlue.shade50,
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: SafeArea(
-          minimum: EdgeInsets.fromLTRB(15, 30, 15, 30),
+          minimum: const EdgeInsets.fromLTRB(15, 30, 15, 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('age'),
-              SizedBox(
+              const Text('name'),
+              const SizedBox(
                 height: 5,
               ),
-              AgeInput(),
-              SizedBox(
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: TextField(
+                  autocorrect: false,
+                  autofocus: true,
+                  decoration: const InputDecoration(hintText: 'name'),
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  controller: nameController,
+                  onChanged: (value) {
+                    setState(() {
+                      setName(value);
+                      context.read<MainProvider>().addName(value);
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text('age'),
+              const SizedBox(
+                height: 5,
+              ),
+              const AgeInput(),
+              const SizedBox(
                 height: 30,
               ),
-              Text('weight'),
-              SizedBox(
+              const Text('weight'),
+              const SizedBox(
                 height: 5,
               ),
-              WeightInput(),
-              SizedBox(
+              const WeightInput(),
+              const SizedBox(
                 height: 40,
               ),
-              Text('my pet info'),
-              SizedBox(
+              const Text('my pet info'),
+              const SizedBox(
                 height: 10,
               ),
-              PetInfo(),
+              const PetInfo(),
             ],
           ),
         ),
