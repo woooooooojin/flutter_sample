@@ -42,10 +42,8 @@ class _CatInfoScreenState extends State<CatInfoScreen> {
                   textInputAction: TextInputAction.next,
                   controller: nameController,
                   onChanged: (value) {
-                    setState(() {
-                      setName(value);
-                      context.read<MainProvider>().addName(value);
-                    });
+                    setName(value);
+                    context.read<MainProvider>().addName(value);
                   },
                 ),
               ),
